@@ -25,10 +25,13 @@ public class ForkBlur extends RecursiveAction {
         {
             computeDirectly();
         }
-        int split = length / 2;
+        else
+        {
+            int split = length / 2;
 
-        invokeAll(new ForkBlur(source, destination, start, split),
-                new ForkBlur(source, destination, start + split, length - split));
+            invokeAll(new ForkBlur(source, destination, start, split),
+                    new ForkBlur(source, destination, split, length - split));
+        }
     }
 
     public void computeDirectly()
@@ -43,7 +46,7 @@ public class ForkBlur extends RecursiveAction {
                 int pixel = source[mindex];
                 rt += (float)((pixel & 0x00ff0000) >> 16) / blurWidth;
                 gt += (float)((pixel & 0x0000ff00) >> 8) / blurWidth;
-                bt += (float)((pixel & 0x000000ff) >> 0) / blurWidth;
+                bt += (float)((pixel & 0x000000ff)) / blurWidth;
             }
 
             destination[index] = (0xff000000) |

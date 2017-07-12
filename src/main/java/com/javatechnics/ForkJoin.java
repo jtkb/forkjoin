@@ -4,8 +4,8 @@ import java.util.concurrent.ForkJoinPool;
 
 
 public class ForkJoin {
-    private static final int HEIGHT = 100;
-    private static final int WIDTH = 100;
+    private static final int HEIGHT = 1000;
+    private static final int WIDTH = 1000;
     private static final int[] source = new int[WIDTH * HEIGHT];
     private static final int[] dest = new int[HEIGHT * WIDTH];
 
@@ -24,7 +24,7 @@ public class ForkJoin {
 
         long stopTime = System.nanoTime();
 
-        System.out.println("ForkJoin time is : " + (stopTime - startTime) / 1000 + "ms");
+        System.out.println("ForkJoin time is : " + (stopTime - startTime) / 1000000 + "ms");
 
         ForkBlur singleThreadFB = new ForkBlur(source, dest, 0, source.length);
 
@@ -32,7 +32,7 @@ public class ForkJoin {
         singleThreadFB.computeDirectly();
         stopTime = System.nanoTime();
 
-        System.out.println("Single thread time is : " + (stopTime - startTime) / 1000 + "ms");
+        System.out.println("Single thread time is : " + (stopTime - startTime) / 1000000 + "ms");
 
 
     }
